@@ -33,7 +33,7 @@ func worker(filesChan <-chan string, wg *sync.WaitGroup, rdb *redis.Client, ctx 
 	defer client.Close()
 	client.SetLanguage("eng", "hin", "urd") // Set the languages once
     for path := range filesChan {
-		fmt.Println("Processing file:", path)
+		// fmt.Println("Processing file:", path)
 		fileData, err := extractTextWithClient(client, path) // Use the persistent client
 		if err != nil {
 			errChan <- fmt.Errorf("error extracting text from %q: %w", path, err)
@@ -74,7 +74,7 @@ func SetKey(rdb *redis.Client, key string, value interface{}) error {
     if err != nil {
         return err
     }
-	fmt.Println(key)
+	// fmt.Println(key)
     // Use the string(jsonData) as the value for the Redis set command
     return rdb.Set(ctx, key, string(jsonData), 0).Err()
 }
