@@ -25,7 +25,7 @@ func main() {
 	}()
 	rootPath := os.Getenv("ROOT_PATH")
 	if rootPath == "" {
-		log.Fatal("MONGO_URI not set in environment")
+		log.Fatal("Root Path Not Set")
 	}
 	
 	indexerEngine(rootPath)
