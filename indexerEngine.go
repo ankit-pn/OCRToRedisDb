@@ -74,7 +74,7 @@ func SetKey(rdb *redis.Client, key string, value interface{}) error {
     if err != nil {
         return err
     }
-
+	fmt.Println(key)
     // Use the string(jsonData) as the value for the Redis set command
     return rdb.Set(ctx, key, string(jsonData), 0).Err()
 }
