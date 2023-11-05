@@ -116,8 +116,12 @@ func indexerEngine(rootPath string) {
         }
 		fullFileName := info.Name()
 		fileBaseName := strings.TrimSuffix(fullFileName, filepath.Ext(fullFileName))
-		_,err = GetKey(rdb, fileBaseName)
-        if !info.IsDir() && strings.HasSuffix(strings.ToLower(info.Name()), ".jpeg")  {
+		val, err := GetKey(rdb, fileBaseName)
+		if err != nil {
+			fmt.Printf("error checking key %q: %v\n", fileBaseName, err)
+			return err // Handle the error as needed
+		}
+        if !info.IsDir() && strings.HasSuffix(strings.ToLower(info.Name()), ".jpeg") && val == ""  {
             filesChan <- path
         }
         return nil
